@@ -3,15 +3,23 @@ require 'optparse'
 
 # Allow passing a file or string as an argument for translating text
 options = {}
+
+ARGV << '-h' if ARGV.empty?
+
 OptionParser.new do |opts|
   opts.banner = "Usage: main.rb [options]"
 
-  opts.on("-s", "--string", "Run verbosely") do |f|
+  opts.on("-s", "--string", "translates a sequence of words or single word") do |f|
     options[:string] = f
   end
 
-  opts.on("-f", "--string", "Run verbosely") do |f|
+  opts.on("-f", "--file", "translates a file") do |f|
     options[:file] = f
+  end
+
+  opts.on_tail("-h", "--help", "Show options") do
+      puts opts
+      exit
   end
 
 end.parse!
@@ -33,9 +41,14 @@ end
 # Usage : ruby main.rb -f text.txt output.txt
 if options[:file]
 	total_translated_text = ""
-	File.foreach(ARGV[0]) do |line| 
-		total_translated_text += PigLatinTranslator.translate_line(line)+"\n"
-		
+	if ARGV.length < 2
+		puts "Please provide an input text file and output text file"
+		puts "Ex. main.rb example_text.txt output.txt"
+	else
+		File.foreach(ARGV[0]) do |line| 
+			total_translated_text += PigLatinTranslator.translate_line(line)+"\n"
+			
+		end
+		File.write("outputs/#{ARGV[1]}", total_translated_text, mode: "w")
 	end
-	File.write(ARGV[1], total_translated_text, mode: "w")
 end
