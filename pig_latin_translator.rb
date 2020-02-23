@@ -50,17 +50,22 @@ class PigLatinTranslator
 			# find position of first vowel
 			first_vowel_index = word.index(/[aeiouyAEIOUY]/)
 			
+			# handles the y case, if y is not followed by a vowel, treat y as a consonant
+			if word[first_vowel_index].downcase == "y" && first_vowel_index < (word.length-1) && word[first_vowel_index+1].scan(/[aeiouAEIOU]/).empty?
+				# find position of the next vowel
+				first_vowel_index = word.index(/[aeiouAEIOU]/)
+			# handles qu case, if 'u' proceeds a 'q' and the combined 'qu' is followed by a vowel, treat 'u' as a consonant
+			elsif word[first_vowel_index].downcase == "u" && first_vowel_index > 0 && word[first_vowel_index-1].downcase == "q" && first_vowel_index < (word.length-1) && !word[first_vowel_index+1].scan(/[aeiouyAEIOUY]/).empty?
+				first_vowel_index+=1
+			end
+
 			# if there are no vowels, assume first it is at first index
 			if first_vowel_index.nil?
 				first_vowel_index = 0
 			# if vowel is at first index, end ay is changed to way.
 			elsif first_vowel_index == 0
-				# if first vowel is y, treat like consonant
-				if !word[first_vowel_index].scan(/[yY]/).empty?
-					first_vowel_index += 1
-				else
-					end_ay = "way"
-				end
+				end_ay = "way"
+				
 			end
 
 			word.downcase!

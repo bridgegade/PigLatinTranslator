@@ -8,7 +8,7 @@ class TestPigLatin < Minitest::Test
 	# Tests a collection of phrases
 	def test_words
 		test_words = ["hello","eat","yellow","eat world", "Hello", "Apples", "eat… world?!", "school", "quick","she’s great!", "HELLO", "Hello There", "Yes, he spent $1000!!!", "rhythm", "a", "I", "$1000", "I am Sam"]
-		translated_words = ["ellohay","eatway","ellowyay","eatway orldway","Ellohay","Applesway","eatway… orldway?!","oolschay","uickqay","e’sshay eatgray!","ELLOHAY","Ellohay Erethay","Esyay, ehay entspay $1000!!!","ythmrhay", "away", "Iway", "$1000", "Iway amway Amsay"]
+		translated_words = ["ellohay","eatway","yellowway","eatway orldway","Ellohay","Applesway","eatway… orldway?!","oolschay","ickquay","e’sshay eatgray!","ELLOHAY","Ellohay Erethay","Yesway, ehay entspay $1000!!!","rhythmay", "away", "Iway", "$1000", "Iway amway Amsay"]
 
 		test_words.each_with_index do |word, index|
 			translated_word = PigLatinTranslator.translate_line(word)
