@@ -22,6 +22,12 @@ To translate a file, add the -f option and pass in the input text file first and
 ruby main.rb -f text.txt output.txt
 ```
 
+## Testing
+Run the following command to run the test file
+```bash
+ruby tester.rb
+```
+
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
