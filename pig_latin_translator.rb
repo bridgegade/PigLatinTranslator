@@ -1,6 +1,6 @@
 ##
 # This class holds methods for translating text to Pig Latin
-class PigLatinTranslator
+module PigLatinTranslator
 
 	##
 	# Translates a single line of text with words separated by spaces
